@@ -51,9 +51,6 @@ public class EstadoImp implements Estado{
 		this.ladoLocalizacaoLanterna = ladoLocalizacaoLanterna;
 	}
 
-
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,11 +70,10 @@ public class EstadoImp implements Estado{
 	@Override
 	public boolean estadoValido() {
 		boolean numeroDePessoasValido = (
-			(this.pessoasNoFim.size() > 0 || this.pessoasNoInicio.size() > 0) &&
-			(this.pessoasNoFim.size() != this.pessoasNoInicio.size()) 
+			(this.pessoasNoFim.size() + this.pessoasNoInicio.size())  ==  4
 		);
 		boolean pessoasDiferentesNosLados = Collections.disjoint(this.pessoasNoFim, this.pessoasNoInicio);		
-		boolean tempoValido = this.tempoDercorrido <= 15; 
+		boolean tempoValido = (this.tempoDercorrido <= 15); 
 		
 		return (
 			numeroDePessoasValido &&
