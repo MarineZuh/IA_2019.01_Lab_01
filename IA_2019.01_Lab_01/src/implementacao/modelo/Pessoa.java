@@ -1,24 +1,16 @@
 package implementacao.modelo;
 
 public class Pessoa {
-	private char nome;
+	private String nome;
 	private int tempoDeTravessia;
 	
 	public Pessoa () {
 		
 	}
 
-	public Pessoa(char nome, int tempoDeTravessia) {
+	public Pessoa(String nome, int tempoDeTravessia) {
 		this.nome = nome;
 		this.tempoDeTravessia = tempoDeTravessia;
-	}
-
-	public char getId() {
-		return nome;
-	}
-
-	public void setId(char nome) {
-		this.nome = nome;
 	}
 
 	public int getTempoDeTravessia() {
@@ -34,12 +26,19 @@ public class Pessoa {
 		return "Pessoa [id=" + nome + ", tempoDeTravessia=" + tempoDeTravessia + "]";
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + nome;
-		result = prime * result + tempoDeTravessia;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
@@ -52,12 +51,16 @@ public class Pessoa {
 		if (getClass() != obj.getClass())
 			return false;
 		Pessoa other = (Pessoa) obj;
-		if (nome != other.nome)
+		if (nome == null) {
+			if (other.nome == null) return true;
 			return false;
-		if (tempoDeTravessia != other.tempoDeTravessia)
+		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
 	}
+
+
+
 
 	
 	

@@ -93,4 +93,12 @@ public class EstadoImp implements Estado{
 		);
 	}
 
+	@Override
+	public String toString() {
+		return "EstadoImp [\n\ttempoDercorrido=" + tempoDercorrido + ", \n\tpessoasNoInicio=" + pessoasNoInicio.toString()
+				+ ", \n\tpessoasNoFim=" + pessoasNoFim.toString() + ", \n\tladoLocalizacaoLanterna=" + ladoLocalizacaoLanterna.toString() + "\n]";
+	}
+	
+	
+
 }
