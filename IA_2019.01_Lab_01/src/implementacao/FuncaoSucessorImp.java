@@ -51,6 +51,7 @@ public class FuncaoSucessorImp implements FuncaoSucessor {
 			
 			if (result.estadoValido()) {
 				tupla = new AbstractMap.SimpleEntry(a, result);
+				/*
 				System.out.println("=======================");
 				System.out.println("estado inicial");
 				System.out.println(e);
@@ -59,6 +60,7 @@ public class FuncaoSucessorImp implements FuncaoSucessor {
 				System.out.println("estado resultado");
 				System.out.println(result.toString());
 				System.out.println("=======================");
+				*/
 				set.add(tupla);
 			}
 		}

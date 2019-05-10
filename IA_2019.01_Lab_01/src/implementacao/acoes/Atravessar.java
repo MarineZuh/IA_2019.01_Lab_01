@@ -46,7 +46,7 @@ public class Atravessar extends AbstractAcao{
 		}
 		// se o tempo nao mudou, ninguem atravessou
 		if(tempoDercorrido == estadoAtual.getTempoDercorrido()) {
-			System.out.println("MOVIMENTO INVALIDO");
+			// System.out.println("MOVIMENTO INVALIDO");
 			return e;
 		}
 		
@@ -64,20 +64,20 @@ public class Atravessar extends AbstractAcao{
 		Pessoa p2 = this.par.getPessoa2();
 		//se existir apenas a pessoa 1 no par
 		if(p2 == null && origem.contains(p1)) {
-			System.out.println("moveu 1");
+			// System.out.println("moveu 1");
 			return this.movePessoa(origem, destino, p1);
 		} else {
 			//checa se eles estao na origem:
 			if(origem.contains(p1) && origem.contains(p2)) {
 				int tempoPessoa1 = this.movePessoa(origem, destino, p1);
 				int tempoPessoa2 = this.movePessoa(origem, destino, p2);
-				System.out.println("moveu 2");
+				// System.out.println("moveu 2");
 				return (
 					(tempoPessoa1 > tempoPessoa2 ? tempoPessoa1 : tempoPessoa2)
 				);
 			}
 		}
-		System.out.println("moveu 0");
+		// System.out.println("moveu 0");
 		return 0;
 		
 	}
@@ -91,7 +91,7 @@ public class Atravessar extends AbstractAcao{
 	
 	@Override
 	public String toString() {
-		return "Atravessar [\n \tpar=" + par.toString() + "\n]";
+		return "Atravessar [" + par.toString() + "]";
 	}	
 	
 	

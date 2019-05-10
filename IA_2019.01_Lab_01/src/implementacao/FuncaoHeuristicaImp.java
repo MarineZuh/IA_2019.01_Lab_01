@@ -5,9 +5,9 @@ import interfaces.FuncaoHeuristica;
 public class FuncaoHeuristicaImp implements FuncaoHeuristica{
 
 	@Override
-	public double h(Object arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double h(Object estado) {
+		EstadoImp e = (EstadoImp)estado;
+		return 15 + e.getTempoDercorrido();
 	}
 
 }
