@@ -12,13 +12,10 @@ import interfaces.Estado;
 public class Atravessar extends AbstractAcao{
 	// set de pessoas
 	private Par par;
-	// lado torcha?
-	private Lado lado;
 	
-	public Atravessar(Par par, Lado lado) {
+	public Atravessar(Par par) {
 		super();
 		this.par = par;
-		this.lado = lado;
 	}
 	
 	public Par getPar() {
@@ -28,12 +25,6 @@ public class Atravessar extends AbstractAcao{
 		this.par = par;
 	}
 	
-	public Lado getLado() {
-		return lado;
-	}
-	public void setLado(Lado lado) {
-		this.lado = lado;
-	}
 
 	@Override
 	public Estado resultado(Estado e) {
@@ -44,14 +35,19 @@ public class Atravessar extends AbstractAcao{
 		int tempoDercorrido = estadoAtual.getTempoDercorrido();
 		Lado ladoLocalizacaoLanterna = estadoAtual.getLadoLocalizacaoLanterna();
 		
-		if(this.lado == Lado.INICIO) {
-			int t = this.movePessoaIF(pessoasNoInicio, pessoasNoFim);
+		if(ladoLocalizacaoLanterna == Lado.INICIO) {
+			int t = this.mover(pessoasNoInicio, pessoasNoFim);
 			tempoDercorrido += t;
 			ladoLocalizacaoLanterna = Lado.FIM;
 		} else {
-			int t = this.movePessoaFI(pessoasNoInicio, pessoasNoFim);
+			int t = this.mover(pessoasNoFim, pessoasNoInicio);
 			tempoDercorrido += t;
 			ladoLocalizacaoLanterna = Lado.INICIO;
+		}
+		// se o tempo nao mudou, ninguem atravessou
+		if(tempoDercorrido == estadoAtual.getTempoDercorrido()) {
+			System.out.println("MOVIMENTO INVALIDO");
+			return e;
 		}
 		
 		EstadoImp novoEstado = new EstadoImp(
@@ -63,50 +59,39 @@ public class Atravessar extends AbstractAcao{
 		return novoEstado;
 	}
 	
-	private int movePessoaIF(HashSet<Pessoa> inicio, HashSet<Pessoa> fim) {
-		Pessoa p1 = this.getPessoa(inicio, this.par.getPessoa1());
-		Pessoa p2= this.getPessoa(inicio, this.par.getPessoa2());
-		int tempo = 0;
-		if(p1 != null) {
-			inicio.remove(p1);
-			fim.add(p1);
-			tempo = p1.getTempoDeTravessia();
+	private Integer mover(HashSet<Pessoa> origem, HashSet<Pessoa> destino) {
+		Pessoa p1 = this.par.getPessoa1();
+		Pessoa p2 = this.par.getPessoa2();
+		//se existir apenas a pessoa 1 no par
+		if(p2 == null && origem.contains(p1)) {
+			System.out.println("moveu 1");
+			return this.movePessoa(origem, destino, p1);
+		} else {
+			//checa se eles estao na origem:
+			if(origem.contains(p1) && origem.contains(p2)) {
+				int tempoPessoa1 = this.movePessoa(origem, destino, p1);
+				int tempoPessoa2 = this.movePessoa(origem, destino, p2);
+				System.out.println("moveu 2");
+				return (
+					(tempoPessoa1 > tempoPessoa2 ? tempoPessoa1 : tempoPessoa2)
+				);
+			}
 		}
-		if(p2 != null) {
-			inicio.remove(p2);
-			fim.add(p2);
-			tempo = tempo < p2.getTempoDeTravessia() ? p2.getTempoDeTravessia() : tempo;
-		}
-		return tempo;
+		System.out.println("moveu 0");
+		return 0;
 		
 	}
-	private int movePessoaFI(HashSet<Pessoa> inicio, HashSet<Pessoa> fim) {
-		Pessoa p1 = this.getPessoa(fim, this.par.getPessoa1());
-		Pessoa p2= this.getPessoa(fim, this.par.getPessoa2());
-		int tempo = 0;
-		if(p1 != null) {
-			fim.remove(p1);
-			inicio.add(p1);	
-			tempo = p1.getTempoDeTravessia();
-			
-		}
-		if(p2 != null) {
-			fim.remove(p2);
-			inicio.add(p2);	
-			tempo = tempo < p2.getTempoDeTravessia() ? p2.getTempoDeTravessia() : tempo;
-		}
-		return tempo;
-	}
 	
-	private Pessoa getPessoa(HashSet<Pessoa> set, String nome) {
-		if (nome == null) return null;	
-		return set.stream().filter(p -> p.getNome() == nome).findFirst().orElse(null);
-	
+	private int movePessoa(HashSet<Pessoa> origem, HashSet<Pessoa> destino, Pessoa p) {
+		origem.remove(p);
+		destino.add(p);
+		return p.getTempoDeTravessia();
 	}
-
+		
+	
 	@Override
 	public String toString() {
-		return "Atravessar [\n \tpar=" + par.toString() + ", \n\tlado=" + lado.toString() + "\n]";
+		return "Atravessar [\n \tpar=" + par.toString() + "\n]";
 	}	
 	
 	

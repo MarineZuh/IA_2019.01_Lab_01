@@ -49,7 +49,7 @@ public class FuncaoSucessorImp implements FuncaoSucessor {
 		for (Acao a : this.geraAcoes((EstadoImp) e)) {
 			Estado result = a.resultado(e);
 			
-			if (result.estadoValido()) { // TODO if a.preCondicoesSatisfeitas()
+			if (result.estadoValido()) {
 				tupla = new AbstractMap.SimpleEntry(a, result);
 				System.out.println("=======================");
 				System.out.println("estado inicial");
@@ -68,75 +68,56 @@ public class FuncaoSucessorImp implements FuncaoSucessor {
 
 	public List<Atravessar> geraAcoes(EstadoImp e) {
 		List<Atravessar> acoes = new ArrayList<>();
-
-		List<Par> l = this.comb();
-		// System.out.println("pares "+l.toString());
-		if (e.getLadoLocalizacaoLanterna() == Lado.FIM) {
-			l.forEach(par -> {
-
-				Pessoa p1 = new Pessoa(par.getPessoa1(), 0);
-				Pessoa p2 = new Pessoa(par.getPessoa2(), 0);
-				if (e.getPessoasNoFim().contains(p1) && (p2.getNome() == null || e.getPessoasNoFim().contains(p2))) {
-					acoes.add(new Atravessar(par, Lado.FIM));
-				}
-			});
-		} else {
-			l.forEach(par -> {
-
-				Pessoa p1 = new Pessoa(par.getPessoa1(), 0);
-				Pessoa p2 = new Pessoa(par.getPessoa2(), 0);
-
-				if (e.getPessoasNoInicio().contains(p1)
-						&& (p2.getNome() == null || e.getPessoasNoInicio().contains(p2))) {
-					acoes.add(new Atravessar(par, Lado.INICIO));
-				}
-			});
-		}
-		// System.out.println("possiveis "+acoes);
+		List<Par> l = this.gerarCombinacoesAcao();
+		l.forEach(p -> acoes.add(new Atravessar(p)));
 		return acoes;
 	}
 
-	public List<Par> comb() {
+	public List<Par> gerarCombinacoesAcao() {
 		List<Par> pares = new ArrayList<>();
-		String[] l1 = { "A", "B", "C", "D" };
-		String[] l2 = { "A", "B", "C", "D" };
+		List<Pessoa> pessoas = new ArrayList<>();
+		pessoas.add(new Pessoa("A", 1));
+		pessoas.add(new Pessoa("B", 2));
+		pessoas.add(new Pessoa("C", 5));
+		pessoas.add(new Pessoa("D", 8));
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < pessoas.size(); i++) {
 			Par p1 = new Par();
-			p1.addPessoa(l1[i]);
+			p1.addPessoa(pessoas.get(i));
 			pares.add(p1);
-			for (int j = i + 1; j < 4; j++) {
+			for (int j = i + 1; j < pessoas.size(); j++) {
 				Par p2 = new Par();
-				p2.addPessoa(l1[i]);
-				p2.addPessoa(l2[j]);
+				p2.addPessoa(pessoas.get(i));
+				p2.addPessoa(pessoas.get(j));
 				pares.add(p2);
 			}
 		}
 		// System.out.println(pares.toString());
 		return pares;
 	}
-
+/*
 	public static void main(String[] args) {
 		FuncaoSucessorImp f = new FuncaoSucessorImp();
 		Pessoa p1 = new Pessoa("A", 1);
 		Pessoa p2 = new Pessoa("B", 2);
-		Pessoa p3 = new Pessoa("C", 3);
-		Pessoa p4 = new Pessoa("D", 4);
+		Pessoa p3 = new Pessoa("C", 5);
+		Pessoa p4 = new Pessoa("D", 8);
 		HashSet<Pessoa> pi = new HashSet<>();
 		HashSet<Pessoa> pf = new HashSet<>();
-		// pi.add(p1);
-		// pi.add(p2);
-		pi.add(p3);
+		pi.add(p1);
+		pi.add(p2);
+		//pi.add(p3);
 		pi.add(p4);
 
-		pf.add(p1);
-		pf.add(p2);
-		// pf.add(p3);
-		// pf.add(p4);
+		//pf.add(p1);
+		// pf.add(p2);
+		pf.add(p3);
+		//pf.add(p4);
 
-		Estado e = new EstadoImp(0, pi, pf, Lado.INICIO);
+		Estado e = new EstadoImp(0, pi, pf, Lado.FIM);
 		// f.comb();
 		// f.acoes(e);
 		f.sucessores(e);
 	}
+	*/
 }

@@ -8,6 +8,8 @@ public class Pessoa {
 		
 	}
 
+
+
 	public Pessoa(String nome, int tempoDeTravessia) {
 		this.nome = nome;
 		this.tempoDeTravessia = tempoDeTravessia;
@@ -23,7 +25,7 @@ public class Pessoa {
 
 	@Override
 	public String toString() {
-		return "Pessoa [id=" + nome + ", tempoDeTravessia=" + tempoDeTravessia + "]";
+		return "[id=" + nome + ", tempoDeTravessia=" + tempoDeTravessia + "]";
 	}
 
 	public String getNome() {

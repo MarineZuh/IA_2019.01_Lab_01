@@ -1,5 +1,6 @@
 package implementacao.acoes;
 
+import implementacao.EstadoImp;
 import interfaces.Acao;
 import interfaces.Estado;
 
@@ -27,9 +28,8 @@ public class AbstractAcao implements Acao{
     }
 
 	@Override
-	public double custo(Estado arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double custo(Estado e) {
+		return ((EstadoImp)e).getTempoDercorrido();
 	}
 
 	@Override
