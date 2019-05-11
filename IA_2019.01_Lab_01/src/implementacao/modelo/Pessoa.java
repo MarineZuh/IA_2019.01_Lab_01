@@ -25,7 +25,7 @@ public class Pessoa {
 
 	@Override
 	public String toString() {
-		return "[id=" + nome + ", tempoDeTravessia=" + tempoDeTravessia + "]";
+		return "[\'" + nome + "\', " + tempoDeTravessia + "]";
 	}
 
 	public String getNome() {

@@ -39,15 +39,17 @@ public class Principal {
 	        long t4 = System.currentTimeMillis();
 	        
 	        Estado e = p.estadoInicial();
-	        System.out.println(e);
-	        
+	        System.out.println("==================================");
+	        System.out.println("Estado inicial: "+e);
+	        System.out.println("==================================");
 	        
 	        List<Acao> result=result4;
 	        for (int i = 0; i < result.size(); i++) {
-	            System.out.println("[Passo " + i + "]" + result.get(i));
+	            System.out.println("[Passo " + i + "]: " + result.get(i));
 	            Acao a = result.get(i);
 	            e = a.resultado(e);
-	            System.out.println(e);
+	            System.out.println("Estado resultado: "+e);
+	            System.out.println("==================================");
 	        }
 	        
 	        System.out.println("Elapsed time \n"+

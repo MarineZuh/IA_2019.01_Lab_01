@@ -35,28 +35,29 @@ public class Atravessar extends AbstractAcao{
 		int tempoDercorrido = estadoAtual.getTempoDercorrido();
 		Lado ladoLocalizacaoLanterna = estadoAtual.getLadoLocalizacaoLanterna();
 		
+		int t;
 		if(ladoLocalizacaoLanterna == Lado.INICIO) {
-			int t = this.mover(pessoasNoInicio, pessoasNoFim);
-			tempoDercorrido += t;
+			t = this.mover(pessoasNoInicio, pessoasNoFim);
 			ladoLocalizacaoLanterna = Lado.FIM;
 		} else {
-			int t = this.mover(pessoasNoFim, pessoasNoInicio);
-			tempoDercorrido += t;
+			t = this.mover(pessoasNoFim, pessoasNoInicio);
 			ladoLocalizacaoLanterna = Lado.INICIO;
 		}
+		
+		tempoDercorrido += t;
+		
 		// se o tempo nao mudou, ninguem atravessou
 		if(tempoDercorrido == estadoAtual.getTempoDercorrido()) {
 			// System.out.println("MOVIMENTO INVALIDO");
 			return e;
 		}
 		
-		EstadoImp novoEstado = new EstadoImp(
+		return new EstadoImp(
 			tempoDercorrido, 
 			pessoasNoInicio, 
 			pessoasNoFim, 
 			ladoLocalizacaoLanterna
 		);
-		return novoEstado;
 	}
 	
 	private Integer mover(HashSet<Pessoa> origem, HashSet<Pessoa> destino) {

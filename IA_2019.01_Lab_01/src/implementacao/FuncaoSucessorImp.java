@@ -70,12 +70,12 @@ public class FuncaoSucessorImp implements FuncaoSucessor {
 
 	public List<Atravessar> geraAcoes(EstadoImp e) {
 		List<Atravessar> acoes = new ArrayList<>();
-		List<Par> l = this.gerarCombinacoesAcao();
+		List<Par> l = this.gerarParesTravessia();
 		l.forEach(p -> acoes.add(new Atravessar(p)));
 		return acoes;
 	}
 
-	public List<Par> gerarCombinacoesAcao() {
+	public List<Par> gerarParesTravessia() {
 		List<Par> pares = new ArrayList<>();
 		List<Pessoa> pessoas = new ArrayList<>();
 		pessoas.add(new Pessoa("A", 1));
