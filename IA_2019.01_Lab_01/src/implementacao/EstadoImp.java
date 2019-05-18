@@ -51,22 +51,11 @@ public class EstadoImp implements Estado{
 		this.ladoLocalizacaoLanterna = ladoLocalizacaoLanterna;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((ladoLocalizacaoLanterna == null) ? 0 : ladoLocalizacaoLanterna.hashCode());
-		result = prime * result + ((pessoasNoFim == null) ? 0 : pessoasNoFim.hashCode());
-		result = prime * result + ((pessoasNoInicio == null) ? 0 : pessoasNoInicio.hashCode());
-		result = prime * result + tempoDercorrido;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return this.igual((EstadoImp)obj);
-	}
-
+	/**
+	 * Um estado é válido se o numero de pessoas é 4, 
+	 * há pessoas diferentes nos dois lados da ponte e
+	 * o tempo dercorrido até o momento é válido
+	 */
 	@Override
 	public boolean estadoValido() {
 		boolean numeroDePessoasValido = (
@@ -91,6 +80,22 @@ public class EstadoImp implements Estado{
 			estado.pessoasNoInicio.containsAll(this.pessoasNoInicio) &&
 			estado.tempoDercorrido == this.tempoDercorrido
 		);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ladoLocalizacaoLanterna == null) ? 0 : ladoLocalizacaoLanterna.hashCode());
+		result = prime * result + ((pessoasNoFim == null) ? 0 : pessoasNoFim.hashCode());
+		result = prime * result + ((pessoasNoInicio == null) ? 0 : pessoasNoInicio.hashCode());
+		result = prime * result + tempoDercorrido;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.igual((EstadoImp)obj);
 	}
 
 	@Override

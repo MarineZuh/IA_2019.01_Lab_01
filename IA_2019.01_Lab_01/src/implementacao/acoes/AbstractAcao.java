@@ -27,7 +27,7 @@ public class AbstractAcao implements Acao{
         return id;
     }
 
-	@Override
+    	@Override
 	public double custo(Estado e) {
 		return ((EstadoImp)e).getTempoDercorrido();
 	}

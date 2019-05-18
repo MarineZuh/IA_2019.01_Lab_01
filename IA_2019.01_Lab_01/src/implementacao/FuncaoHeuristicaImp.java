@@ -3,11 +3,13 @@ package implementacao;
 import interfaces.FuncaoHeuristica;
 
 public class FuncaoHeuristicaImp implements FuncaoHeuristica{
-
+	/**
+	 * Numero de pessoas no inicio da ponte
+	 */
 	@Override
 	public double h(Object estado) {
 		EstadoImp e = (EstadoImp)estado;
-		return 15 + e.getTempoDercorrido();
+		return e.getPessoasNoInicio().size();
 	}
 
 }

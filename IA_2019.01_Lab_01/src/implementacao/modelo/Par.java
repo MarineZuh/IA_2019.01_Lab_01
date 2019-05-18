@@ -42,6 +42,6 @@ public class Par {
 
 	@Override
 	public String toString() {
-		return "[" + pessoa1 + ", " + pessoa2 + "]";
+		return "(" + pessoa1 + ", " + pessoa2 + ")";
 	}
 }

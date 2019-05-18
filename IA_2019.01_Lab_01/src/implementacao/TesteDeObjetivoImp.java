@@ -16,8 +16,10 @@ public class TesteDeObjetivoImp implements TesteDeObjetivo{
 		Pessoa p2 = new Pessoa("B", 2);
 		Pessoa p3 = new Pessoa("C", 5);
 		Pessoa p4 = new Pessoa("D", 8);
+		
 		HashSet<Pessoa> pi = new HashSet<>();
 		HashSet<Pessoa> pf = new HashSet<>();
+		
 		pf.add(p1);
 		pf.add(p2);
 		pf.add(p3);
